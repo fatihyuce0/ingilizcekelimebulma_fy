@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ingilizcekelimebulma_fy/oynanis/sonuc.dart';
 import 'dart:async';
+import 'package:ingilizcekelimebulma_fy/services/db_Gorev.dart';
+import 'package:ingilizcekelimebulma_fy/models/Gorev.dart';
+DbUtils utils = DbUtils();
 
 var sorular = [
   {
@@ -61,6 +64,31 @@ class oyun extends StatefulWidget {
 }
 
 class _oyunState extends State<oyun> {
+  List<Gorev> gorevList = [];
+
+
+
+  int ilerle=-1;
+
+
+
+
+
+
+  void getData() async {
+
+    await utils.gorevler().then((result) => {
+    if (this.mounted) {
+      setState(()  {
+        gorevList = result;
+      })
+    }
+
+    });
+    print(gorevList);
+    ilerle=gorevList[0].ilerleme;
+
+  }
   TextEditingController inputcontroller = new TextEditingController();
   String getValue;
   @override
@@ -70,15 +98,19 @@ class _oyunState extends State<oyun> {
   int puan = 0;
 
   void initState() {
+    getData();
     super.initState();
     _timer = new Timer.periodic(new Duration(seconds: 1), (timer) {
-      setState(() {
-        if (saniye == 60) {
-          saniye = -1;
-          dakika++;
-        }
-        saniye++;
-      });
+      if (this.mounted) {
+        setState(() {
+          if (saniye == 60) {
+            saniye = -1;
+            dakika++;
+          }
+          saniye++;
+        });
+      }
+
     });
   }
 
@@ -115,7 +147,27 @@ class _oyunState extends State<oyun> {
     data = ModalRoute.of(context).settings.arguments;
     nick = data[0];
     _timer.isActive;
+    Future<void> bitis() async {
+      if(ilerle==-1){
+        var fido1 = Gorev(
+          id: 3,
+          ilerleme:1,
 
+        );
+        await utils.insertGorev(fido1);
+      }
+      else{
+        ilerle=ilerle+1;
+        var fido = Gorev(
+          id: 3,
+          ilerleme:ilerle,
+
+        );
+        await utils.updateGorev(fido);
+      }
+
+
+    }
     void kontrol() {
       FocusScope.of(context).requestFocus(FocusNode());
       getValue.toLowerCase();
@@ -123,6 +175,7 @@ class _oyunState extends State<oyun> {
         _showDialog('Tebrikler Doğru Yanıt', '+100 puan');
         puan = puan + 100;
         if (sayi == 9) {
+          bitis();
           if (dakika < 2) {
             puan = puan + 400;
           }
@@ -153,6 +206,7 @@ class _oyunState extends State<oyun> {
       }
     }
 
+
     void _cevapkaydet(text) {
       _Gcevap = text;
     }
@@ -170,11 +224,14 @@ class _oyunState extends State<oyun> {
 
             Expanded(
                 flex: 2,
-                child: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(sorular[sayi]['resim']))),
+                child: Padding(
+                  padding: const EdgeInsets.only(top:20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(sorular[sayi]['resim']))),
+                  ),
                 )),
             Container(
 
@@ -257,10 +314,13 @@ class _oyunState extends State<oyun> {
                             color: Colors.amber,
                             child: Text('Tahmin Et'),
                             onPressed: () {
-                              setState(() {
-                                getValue = inputcontroller.text.toLowerCase();
-                                inputcontroller.clear();
-                              });
+                              if (this.mounted) {
+                                setState(() {
+                                  getValue = inputcontroller.text.toLowerCase();
+                                  inputcontroller.clear();
+                                });
+                              }
+
                               kontrol();
                             },
                           ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ingilizcekelimebulma_fy/digerekranlar/anamenu.dart';
+import 'package:ingilizcekelimebulma_fy/digerekranlar/oyunmenu.dart';
+import 'package:ingilizcekelimebulma_fy/services/db_Gorev.dart';
+import 'package:ingilizcekelimebulma_fy/models/Gorev.dart';
+DbUtils utils = DbUtils();
 
 
 class sonuc extends StatefulWidget {
@@ -7,7 +10,31 @@ class sonuc extends StatefulWidget {
   _sonucState createState() => _sonucState();
 }
 
+
 class _sonucState extends State<sonuc> {
+  List<Gorev> gorevList = [];
+
+
+  final ilerleme=[Colors.grey,Colors.grey,Colors.grey,Colors.grey,Colors.grey];
+  int a=0;
+  int b=0;
+
+
+
+
+
+  void getData() async {
+
+    await utils.gorevler().then((result) => {
+      setState(()  {
+        gorevList = result;
+
+
+      })
+    });
+    print(gorevList);
+
+  }
   @override
   Widget build(BuildContext context) {
     debugShowCheckedModeBanner: false;
@@ -108,7 +135,7 @@ class _sonucState extends State<sonuc> {
 
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => anamenu(),
+                                  MaterialPageRoute(builder: (context) => oyunmenu(),
                                     settings: RouteSettings(
                                       arguments: data,
                                     ),

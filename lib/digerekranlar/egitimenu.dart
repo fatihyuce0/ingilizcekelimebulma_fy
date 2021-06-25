@@ -1,49 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:ingilizcekelimebulma_fy/digerekranlar/oyunmenu.dart';
-import 'package:ingilizcekelimebulma_fy/digerekranlar/hakkinda.dart';
-import 'package:ingilizcekelimebulma_fy/digerekranlar/degerlendirme.dart';
-import 'package:ingilizcekelimebulma_fy/digerekranlar/sikayet.dart';
-import 'package:ingilizcekelimebulma_fy/digerekranlar/istatistik.dart';
-import 'package:ingilizcekelimebulma_fy/digerekranlar/egitimenu.dart';
-
-class anamenu extends StatefulWidget {
+import 'package:ingilizcekelimebulma_fy/digerekranlar/trceviri.dart';
+import 'package:ingilizcekelimebulma_fy/digerekranlar/kelimekle.dart';
+import 'package:ingilizcekelimebulma_fy/digerekranlar/dowlandpdf.dart';
+import 'package:ingilizcekelimebulma_fy/digerekranlar/dowlandmp4.dart';
+import 'package:ingilizcekelimebulma_fy/digerekranlar/haber.dart';
+class egitimenu extends StatefulWidget {
   @override
-  _anamenuState createState() => _anamenuState();
+  _egitimenuState createState() => _egitimenuState();
 }
 
-class _anamenuState extends State<anamenu> {
-  String nick = '';
-  var status = true;
-  var dataNick = [];
-  var data=[];
-  int sayi = 0;
+class _egitimenuState extends State<egitimenu> {
 
 
 
 
 
-  void _baslaKontrol() {
-
-      dataNick.add(nick);
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => oyunmenu(),
-            settings: RouteSettings(
-              arguments: dataNick,
-            ),
-
-          )
-      );
 
 
-  }
 
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context).settings.arguments;
-    nick=data[0];
-    return Scaffold(
 
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Eğitim Menü"),
+      ),
 
 
       body: Column(
@@ -54,7 +35,7 @@ class _anamenuState extends State<anamenu> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: new AssetImage('assets/anamenu.png'))),
+                        image: new AssetImage('assets/egitim.jpg'))),
               )),
           Expanded(
               flex: 5,
@@ -66,7 +47,7 @@ class _anamenuState extends State<anamenu> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "Ana Menü",
+                          "Eğitim Menü",
                           style: TextStyle(
                             color: Colors.amber,
                             fontWeight: FontWeight.bold,
@@ -77,7 +58,7 @@ class _anamenuState extends State<anamenu> {
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(
-                            Icons.home,
+                            Icons.school,
                             color: Colors.amber,
                             size: 30,
                           ))
@@ -87,23 +68,26 @@ class _anamenuState extends State<anamenu> {
                   Padding(
                     padding: const EdgeInsets.only(top: 60),
                     child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            RaisedButton(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(30))),
-                              color: Colors.amber,
-                              child: Text('Oyun'),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RaisedButton(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 50),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                            color: Colors.amber,
+                            child: Text('Çeviri'),
 
 
-                              onPressed:  () {
-                                _baslaKontrol();
-                              } ,
-                            ),
-                          ]),
+                            onPressed:  () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>
+                                      trceviri()));
+                            } ,
+                          ),
+                        ]),
                   ),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -115,12 +99,12 @@ class _anamenuState extends State<anamenu> {
                               borderRadius:
                               BorderRadius.all(Radius.circular(30))),
                           color: Colors.amber,
-                          child: Text('Eğitim'),
+                          child: Text('Haber'),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) =>
-                                    egitimenu()));
+                                    haber()));
                           },
                         ),
                       ]
@@ -140,12 +124,12 @@ class _anamenuState extends State<anamenu> {
                               borderRadius:
                               BorderRadius.all(Radius.circular(30))),
                           color: Colors.amber,
-                          child: Text('Şikayet'),
+                          child: Text('Kelime Ekle'),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) =>
-                                   sikayet()));
+                                    kelimekle()));
                           },
                         ),
                       ]
@@ -161,12 +145,12 @@ class _anamenuState extends State<anamenu> {
                               borderRadius:
                               BorderRadius.all(Radius.circular(30))),
                           color: Colors.amber,
-                          child: Text('İstatistik'),
+                          child: Text('Eğitici Pdfler'),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) =>
-                                    istatistik()));
+                                    dowlandpdf()));
                           },
                         ),
                       ]
@@ -182,31 +166,12 @@ class _anamenuState extends State<anamenu> {
                               borderRadius:
                               BorderRadius.all(Radius.circular(30))),
                           color: Colors.amber,
-                          child: Text('Hakkında'),
+                          child: Text('Eğitici Videolar'),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) =>
-                                    hakkinda()));
-                          },
-                        ),
-                      ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        RaisedButton(
-                          padding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(30))),
-                          color: Colors.amber,
-                          child: Text('Değerlendirme'),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    degerlendirme()));
+                                    dowlandmp4()));
                           },
                         ),
                       ]

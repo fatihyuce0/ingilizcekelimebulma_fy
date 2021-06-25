@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:ingilizcekelimebulma_fy/hesapislemleri/Kayit.dart';
 import 'package:ingilizcekelimebulma_fy/hesapislemleri/sifresifirla.dart';
 import 'package:ingilizcekelimebulma_fy/digerekranlar/anamenu.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
 
 
-void main() {
+
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

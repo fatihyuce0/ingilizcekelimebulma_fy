@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "599640038225",
+    "project_id": "ingilizcekelime-4b493",
+    "storage_bucket": "ingilizcekelime-4b493.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599640038225:android:8e4e0e5f2efd43a9c45170",
+        "android_client_info": {
+          "package_name": "com.example.ingilizcekelimebulma_fy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599640038225-ek2uhjheji7ciduecagurt6i0u4eafb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi4pe0ykRTXUwc7nqJyllNW2XTpX_G61E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599640038225-ek2uhjheji7ciduecagurt6i0u4eafb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

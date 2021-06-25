@@ -6,7 +6,12 @@ class hakkinda extends StatefulWidget {
   _hakkindaState createState() => _hakkindaState();
 }
 
+
 class _hakkindaState extends State<hakkinda> {
+  double sayi=200;
+  String metin="Anasayfaya dön";
+  var renk=Colors.blueAccent;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +50,9 @@ class _hakkindaState extends State<hakkinda> {
               height: 20  ,
               color: Colors.lightBlue,
               child: Marquee(
+
+
+
                 text: "Bu uygulama Dr. Öğretim üyesi Ahmet Cevahir Çınar tarafından yürütülen 3301456 kodlu MOBİL PROGRAMLAMA dersi kapsamında 193311009 numaralı Fatih Yüce tarafından 30 Nisan 2021 günü yapılmıştır ",
                 style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.white),
 
@@ -60,22 +68,47 @@ class _hakkindaState extends State<hakkinda> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      RaisedButton(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 40),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(30))),
-                        color: Colors.lightBlue,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 80,vertical: 10),
-                          child: Text('Anasayfaya dön',style:TextStyle(color:Colors.white),),
-                        ),
-                        onPressed: () {
+                      GestureDetector(
+                        onLongPress: (){
+                          setState(() {
+                            renk=Colors.redAccent;
+                          });
+                        },
+                        onTap: (){setState(() {
                           Navigator.pop(context);
+                        });
+                        },
+
+                        onVerticalDragStart: (DragStartDetails details){
+                          setState(() {
+                            sayi=260;
+                          });
+
+
 
                         },
+                          onVerticalDragEnd: (DragEndDetails details){
+                          setState(() {
+                            sayi=200;
+                          });
+
+
+                          },
+
+
+
+
+                        child: Container(
+                          width: sayi,
+                          height: 40,
+                          color: renk,
+                          child:Center(child: Text("$metin",style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16
+                          ),)  )
+                        )
                       ),
+
 
 
 

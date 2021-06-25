@@ -6,35 +6,14 @@ class skortablosu extends StatefulWidget {
 }
 
 class _skortablosuState extends State<skortablosu> {
-  void _showDialog(BuildContext context) {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
 
-        return AlertDialog(
-          title: new Text("Bilgilendirme"),
-          content: new Text("Bu sayfanın işlevi final sınavında tamamlanacaktır.ListViewi aşağı doğru kaydırabilirsiniz."),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Tamam"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
 
 
 
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () => _showDialog(context));
+
 
     int a=2;
     int puan=193311009;
